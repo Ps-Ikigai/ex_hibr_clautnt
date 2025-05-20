@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Crear Aviso</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/avisos"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="formularioAviso" (ngSubmit)="guardarAviso()">
+    <ion-item>
+      <ion-label position="floating">Título (mínimo 5 caracteres)</ion-label>
+      <ion-input type="text" formControlName="titulo"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="formularioAviso.controls['titulo'].invalid && formularioAviso.controls['titulo'].touched">
+      <ion-text color="danger">El título es obligatorio y debe tener al menos 5 caracteres.</ion-text>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Descripción (mínimo 20 caracteres)</ion-label>
+      <ion-textarea rows="5" formControlName="descripcion"></ion-textarea>
+    </ion-item>
+    <ion-item *ngIf="formularioAviso.controls['descripcion'].invalid && formularioAviso.controls['descripcion'].touched">
+      <ion-text color="danger">La descripción es obligatoria y debe tener al menos 20 caracteres.</ion-text>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Imagen (Opcional)</ion-label>
+      <ion-button slot="end" (click)="tomarFoto()">
+        <ion-icon name="camera-outline"></ion-icon>
+        Tomar Foto
+      </ion-button>
+    </ion-item>
+    <ion-img *ngIf="imagenCapturada" [src]="imagenCapturada" style="max-height: 150px;"></ion-img>
+
+    <ion-button expand="full" type="submit" [disabled]="formularioAviso.invalid">
+      Guardar Aviso
+    </ion-button>
+  </form>
+</ion-content>

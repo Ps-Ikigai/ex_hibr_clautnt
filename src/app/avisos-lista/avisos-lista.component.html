@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mis Avisos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let aviso of avisos">
+      <ion-label>
+        <h2>{{ aviso.titulo }}</h2>
+        <p>{{ aviso.descripcion | fechaFormateada }}</p>
+        <ion-note slot="end">{{ aviso.fecha | date:'dd/MM/yyyy HH:mm' }}</ion-note>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button color="danger" (click)="confirmarEliminacion(aviso)">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+    <ion-item *ngIf="avisos.length === 0">
+      <ion-label class="ion-text-center">
+        No hay avisos creados.
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/crear-aviso">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
